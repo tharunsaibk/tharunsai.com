@@ -6,17 +6,15 @@
   <title>Tharunsai B — Backend Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0a0a'/><text x='50' y='72' font-size='62' text-anchor='middle' fill='%23d4a574' font-family='serif' font-style='italic'>t</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://www.zoho.com/favicon.ico">
   <style>
     :root {
-      --bg: #0e0e10;
-      --bg-soft: #16161a;
-      --text: #ece6d8;
-      --muted: #7a7568;
-      --accent: #d4a574;
-      --accent-soft: #d4a57433;
-      --line: #26242a;
+      --bg: #fbfaf7;
+      --text: #1a1a1a;
+      --muted: #8a8a8a;
+      --accent: #2f6df6;
+      --border: #ececec;
     }
 
     * {
@@ -29,360 +27,199 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 15px;
-      line-height: 1.65;
+      font-size: 16px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* Ambient glow */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 20%, rgba(212, 165, 116, 0.10), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(116, 145, 212, 0.08), transparent 60%);
-      z-index: 0;
-    }
-
-    /* Subtle noise */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.035;
-      z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    .layout {
-      position: relative;
-      z-index: 1;
-      max-width: 1080px;
+    .container {
+      max-width: 640px;
       margin: 0 auto;
-      padding: 80px 48px;
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 80px;
-      min-height: 100vh;
+      padding: 96px 32px 80px;
     }
 
-    /* ---- Sidebar ---- */
-    aside {
-      position: sticky;
-      top: 80px;
-      align-self: start;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
+    .banner {
+      position: relative;
+      height: 180px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      background:
+        radial-gradient(circle at 20% 30%, #ffd8a8 0%, transparent 45%),
+        radial-gradient(circle at 80% 40%, #b9d4ff 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, #f6c2dc 0%, transparent 45%),
+        linear-gradient(135deg, #fef3e7 0%, #e7eeff 50%, #fde9f3 100%);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
-    .mark {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .mark::before {
+    .banner::after {
       content: "";
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 2px;
-      transform: rotate(45deg);
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.06) 1px, transparent 0);
+      background-size: 18px 18px;
+      mix-blend-mode: multiply;
+      opacity: 0.5;
     }
 
     h1 {
       font-family: 'Fraunces', Georgia, serif;
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .intro p {
+      color: #2a2a2a;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 32px;
+      margin-top: 72px;
+    }
+
+    .label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 18px;
       font-weight: 500;
-      font-size: 56px;
-      line-height: 1;
-      letter-spacing: -0.025em;
+    }
+
+    .item {
+      margin-bottom: 18px;
+    }
+
+    .item:last-child {
+      margin-bottom: 0;
+    }
+
+    .item .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .item strong {
+      font-weight: 600;
       color: var(--text);
     }
 
-    h1 .italic {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .role {
-      font-family: 'JetBrains Mono', monospace;
+    .item .meta {
       font-size: 12px;
       color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .role .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #6ad48a;
-      box-shadow: 0 0 8px #6ad48a;
-      animation: pulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.55; transform: scale(0.85); }
-    }
-
-    .sidebar-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .sidebar-contact a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      font-family: 'JetBrains Mono', monospace;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      transition: color 0.2s ease;
-    }
-
-    .sidebar-contact a:hover {
-      color: var(--accent);
-    }
-
-    .sidebar-contact a::before {
-      content: "→";
-      opacity: 0.45;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .sidebar-contact a:hover::before {
-      transform: translateX(3px);
-      opacity: 1;
-    }
-
-    /* ---- Main content ---- */
-    main {
-      padding-top: 8px;
-      max-width: 560px;
-    }
-
-    .intro {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 24px;
-      line-height: 1.45;
-      color: var(--text);
-      margin-bottom: 14px;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-    }
-
-    .intro a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent-soft);
-      transition: border-color 0.2s ease;
-    }
-
-    .intro a:hover {
-      border-bottom-color: var(--accent);
-    }
-
-    .intro .em {
-      font-style: italic;
-      color: var(--muted);
-    }
-
-    .secondary {
-      color: var(--muted);
-      font-size: 15px;
-      margin-top: 18px;
-      max-width: 480px;
-    }
-
-    .divider {
-      height: 1px;
-      background: linear-gradient(to right, var(--line), transparent);
-      margin: 64px 0 40px;
-    }
-
-    .block {
-      margin-bottom: 48px;
-    }
-
-    .block:last-child { margin-bottom: 0; }
-
-    .block-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .block-label::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--line);
-    }
-
-    .entry {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: baseline;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .entry:last-child {
-      border-bottom: none;
-    }
-
-    .entry-title {
-      font-size: 16px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .entry-sub {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 3px;
-    }
-
-    .entry-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.05em;
       white-space: nowrap;
     }
 
-    .reading-item .entry-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 19px;
-      font-style: italic;
-      font-weight: 500;
-    }
-
-    footer {
-      margin-top: 80px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+    .item .sub {
       color: var(--muted);
-      letter-spacing: 0.05em;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .contact {
+      margin-top: 56px;
+    }
+
+    .contact-links {
       display: flex;
-      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
     }
 
-    /* ---- Responsive ---- */
-    @media (max-width: 900px) {
-      .layout {
+    .contact-links a {
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        padding: 56px 24px 64px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .banner {
+        height: 140px;
+      }
+
+      .sections {
         grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 56px 28px;
+        gap: 40px;
+        margin-top: 56px;
       }
-
-      aside {
-        position: relative;
-        top: 0;
-      }
-
-      h1 { font-size: 44px; }
-      .intro { font-size: 22px; }
-      main { max-width: 100%; }
-    }
-
-    @media (max-width: 480px) {
-      .layout { padding: 40px 22px; }
-      h1 { font-size: 38px; }
-      .intro { font-size: 19px; }
-      footer { flex-direction: column; gap: 6px; }
     }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <aside>
-      <div class="mark">Portfolio / 2026</div>
+  <main class="container">
+    <div class="banner" aria-hidden="true"></div>
 
-      <h1>Tharunsai<br /><span class="italic">B.</span></h1>
+    <h1>Tharunsai B</h1>
 
-      <div class="role">
-        <span class="dot"></span>
-        Backend Developer · Zoho
-      </div>
-
-      <nav class="sidebar-contact">
-        <a href="mailto:tharunsaibk@gmail.com">tharunsaibk@gmail.com</a>
-        <a href="https://github.com/tharunsaibk" target="_blank" rel="noopener">github.com/tharunsaibk</a>
-        <a href="https://www.linkedin.com/in/tharunsaibk/" target="_blank" rel="noopener">linkedin.com/in/tharunsaibk</a>
-      </nav>
-    </aside>
-
-    <main>
-      <p class="intro">
-        I build <span class="em">backend systems</span> for products at
+    <section class="intro">
+      <p>
+        Software engineer at
         <a href="https://www.zoho.com/" target="_blank" rel="noopener">Zoho</a> —
-        focused on writing reliable, simple code that holds up in production.
+        backend-leaning full-stack, working on product development.
       </p>
+      <p>Zoho is my first company — where I've been growing as an engineer since 2023.</p>
+    </section>
 
-      <p class="secondary">
-        Zoho is where my career began in 2023, and I've been learning the craft of
-        building software at scale ever since.
-      </p>
-
-      <div class="divider"></div>
-
-      <section class="block">
-        <div class="block-label">Experience</div>
-        <div class="entry">
-          <div>
-            <div class="entry-title">Zoho Corporation</div>
-            <div class="entry-sub">Backend · Product development</div>
-          </div>
-          <div class="entry-meta">2023 — Present</div>
+    <div class="sections">
+      <section>
+        <div class="label">Reading</div>
+        <div class="item">
+          <strong>Designing Data-Intensive Applications</strong>
+          <div class="sub">Martin Kleppmann</div>
         </div>
       </section>
 
-      <section class="block">
-        <div class="block-label">Currently reading</div>
-        <div class="entry reading-item">
-          <div>
-            <div class="entry-title">Designing Data-Intensive Applications</div>
-            <div class="entry-sub">Martin Kleppmann</div>
+      <section>
+        <div class="label">Background</div>
+        <div class="item">
+          <div class="title-row">
+            <strong>Zoho</strong>
+            <span class="meta">2023 — Now</span>
           </div>
-          <div class="entry-meta">in progress</div>
+          <div class="sub">Backend-leaning full-stack, product development</div>
         </div>
       </section>
+    </div>
 
-      <footer>
-        <span>© 2026 Tharunsai B</span>
-        <span>Made in India</span>
-      </footer>
-    </main>
-  </div>
+    <section class="contact">
+      <div class="label">Contact</div>
+      <div class="contact-links">
+        <a href="mailto:tharunsaibk@gmail.com">Email</a>
+        <a href="https://github.com/tharunsaibk" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/tharunsaibk/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
