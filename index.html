@@ -1,259 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio · Coming Soon</title>
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg-0: #0a0a14;
-        --bg-1: #14132a;
-        --accent-1: #8b5cf6;
-        --accent-2: #6366f1;
-        --accent-3: #22d3ee;
-        --text-primary: #f5f5f7;
-        --text-muted: rgba(245, 245, 247, 0.55);
-        --text-faint: rgba(245, 245, 247, 0.35);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharunsai B — Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0a0a'/><text x='50' y='72' font-size='62' text-anchor='middle' fill='%23d4a574' font-family='serif' font-style='italic'>t</text></svg>">
+  <style>
+    :root {
+      --bg: #0e0e10;
+      --bg-soft: #16161a;
+      --text: #ece6d8;
+      --muted: #7a7568;
+      --accent: #d4a574;
+      --accent-soft: #d4a57433;
+      --line: #26242a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Ambient glow */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 20%, rgba(212, 165, 116, 0.10), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(116, 145, 212, 0.08), transparent 60%);
+      z-index: 0;
+    }
+
+    /* Subtle noise */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .layout {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 80px 48px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 80px;
+      min-height: 100vh;
+    }
+
+    /* ---- Sidebar ---- */
+    aside {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .mark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mark::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: rotate(45deg);
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    h1 .italic {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .role .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6ad48a;
+      box-shadow: 0 0 8px #6ad48a;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(0.85); }
+    }
+
+    .sidebar-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .sidebar-contact a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      transition: color 0.2s ease;
+    }
+
+    .sidebar-contact a:hover {
+      color: var(--accent);
+    }
+
+    .sidebar-contact a::before {
+      content: "→";
+      opacity: 0.45;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sidebar-contact a:hover::before {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    /* ---- Main content ---- */
+    main {
+      padding-top: 8px;
+      max-width: 560px;
+    }
+
+    .intro {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 24px;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 14px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .intro a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-soft);
+      transition: border-color 0.2s ease;
+    }
+
+    .intro a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    .intro .em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .secondary {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 18px;
+      max-width: 480px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, var(--line), transparent);
+      margin: 64px 0 40px;
+    }
+
+    .block {
+      margin-bottom: 48px;
+    }
+
+    .block:last-child { margin-bottom: 0; }
+
+    .block-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .block-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-title {
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .entry-sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .entry-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .reading-item .entry-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 19px;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 56px 28px;
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-      }
-
-      body {
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-          sans-serif;
-        background: var(--bg-0);
-        color: var(--text-primary);
-        display: grid;
-        place-items: center;
+      aside {
         position: relative;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        top: 0;
       }
 
-      /* Animated gradient background */
-      .bg {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        background:
-          radial-gradient(
-            ellipse at 20% 30%,
-            rgba(139, 92, 246, 0.35),
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 80% 20%,
-            rgba(99, 102, 241, 0.3),
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 60% 80%,
-            rgba(34, 211, 238, 0.2),
-            transparent 50%
-          ),
-          linear-gradient(135deg, var(--bg-0) 0%, var(--bg-1) 100%);
-        animation: drift 18s ease-in-out infinite alternate;
-      }
+      h1 { font-size: 44px; }
+      .intro { font-size: 22px; }
+      main { max-width: 100%; }
+    }
 
-      @keyframes drift {
-        0% {
-          background-position:
-            0% 0%,
-            100% 0%,
-            50% 100%,
-            0% 0%;
-          filter: hue-rotate(0deg);
-        }
-        100% {
-          background-position:
-            10% 20%,
-            80% 30%,
-            40% 70%,
-            0% 0%;
-          filter: hue-rotate(20deg);
-        }
-      }
+    @media (max-width: 480px) {
+      .layout { padding: 40px 22px; }
+      h1 { font-size: 38px; }
+      .intro { font-size: 19px; }
+      footer { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="mark">Portfolio / 2026</div>
 
-      /* Subtle grain overlay for texture */
-      .grain {
-        position: fixed;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
-      }
+      <h1>Tharunsai<br /><span class="italic">B.</span></h1>
 
-      main {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        padding: 2rem;
-        animation: fadeIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-      }
+      <div class="role">
+        <span class="dot"></span>
+        Backend Developer · Zoho
+      </div>
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .eyebrow {
-        font-size: 0.78rem;
-        font-weight: 500;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--text-faint);
-        margin-bottom: 1.75rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 28px;
-        height: 1px;
-        background: var(--text-faint);
-      }
-
-      h1 {
-        font-family: "Fraunces", Georgia, serif;
-        font-weight: 300;
-        font-size: clamp(3.5rem, 12vw, 8rem);
-        letter-spacing: -0.02em;
-        line-height: 1;
-        background: linear-gradient(
-          135deg,
-          var(--text-primary) 0%,
-          var(--accent-1) 60%,
-          var(--accent-3) 100%
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1.25rem;
-      }
-
-      .subtitle {
-        font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-        font-weight: 400;
-        color: var(--text-muted);
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 2.5rem;
-      }
-
-      .subtitle .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent-1);
-        box-shadow: 0 0 12px var(--accent-1);
-        animation: pulse 1.8s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 0.4;
-          transform: scale(0.85);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.1);
-        }
-      }
-
-      .tagline {
-        font-size: 0.95rem;
-        font-weight: 300;
-        color: var(--text-muted);
-        max-width: 28rem;
-        margin: 0 auto;
-        line-height: 1.7;
-      }
-
-      footer {
-        position: fixed;
-        bottom: 1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-        font-size: 0.75rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text-faint);
-      }
-
-      @media (max-width: 480px) {
-        .eyebrow {
-          font-size: 0.7rem;
-          letter-spacing: 0.28em;
-        }
-        .subtitle {
-          letter-spacing: 0.15em;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .bg,
-        main,
-        .subtitle .dot {
-          animation: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="bg" aria-hidden="true"></div>
-    <div class="grain" aria-hidden="true"></div>
+      <nav class="sidebar-contact">
+        <a href="mailto:tharunsaibk@gmail.com">tharunsaibk@gmail.com</a>
+        <a href="https://github.com/tharunsaibk" target="_blank" rel="noopener">github.com/tharunsaibk</a>
+        <a href="https://www.linkedin.com/in/tharunsaibk/" target="_blank" rel="noopener">linkedin.com/in/tharunsaibk</a>
+      </nav>
+    </aside>
 
     <main>
-      <p class="eyebrow">Portfolio</p>
-      <h1>Coming&nbsp;Soon</h1>
-      <p class="subtitle">
-        <span class="dot" aria-hidden="true"></span>
-        In&nbsp;the&nbsp;making
+      <p class="intro">
+        I build <span class="em">backend systems</span> for products at
+        <a href="https://www.zoho.com/" target="_blank" rel="noopener">Zoho</a> —
+        focused on writing reliable, simple code that holds up in production.
       </p>
-      <p class="tagline">
-        A new space is being crafted — thoughtfully, slowly, and with care.
-        Check back soon.
-      </p>
-    </main>
 
-    <footer>© 2026</footer>
-  </body>
+      <p class="secondary">
+        Zoho is where my career began in 2023, and I've been learning the craft of
+        building software at scale ever since.
+      </p>
+
+      <div class="divider"></div>
+
+      <section class="block">
+        <div class="block-label">Experience</div>
+        <div class="entry">
+          <div>
+            <div class="entry-title">Zoho Corporation</div>
+            <div class="entry-sub">Backend · Product development</div>
+          </div>
+          <div class="entry-meta">2023 — Present</div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-label">Currently reading</div>
+        <div class="entry reading-item">
+          <div>
+            <div class="entry-title">Designing Data-Intensive Applications</div>
+            <div class="entry-sub">Martin Kleppmann</div>
+          </div>
+          <div class="entry-meta">in progress</div>
+        </div>
+      </section>
+
+      <footer>
+        <span>© 2026 Tharunsai B</span>
+        <span>Made in India</span>
+      </footer>
+    </main>
+  </div>
+</body>
 </html>
